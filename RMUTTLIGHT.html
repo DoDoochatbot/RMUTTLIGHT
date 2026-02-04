@@ -6,26 +6,18 @@
     <title>RMUTT L!GHT | Light the Voice. Lead the Future.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sky-light: #0EA5E9;
             --sky-blue: #38BDF8;
             --deep-space: #020617;
-            --glow-cyan: rgba(56, 189, 248, 0.5);
-            --glass-white: rgba(255, 255, 255, 0.85);
+            --glass-white: rgba(255, 255, 255, 0.9);
         }
         
         body { 
             font-family: 'Prompt', sans-serif; 
             scroll-behavior: smooth; 
-            background: linear-gradient(to bottom, 
-                #020617 0%, 
-                #0F172A 30%, 
-                #1E1B4B 60%, 
-                #0F172A 85%, 
-                #020617 100%
-            );
+            background: linear-gradient(to bottom, #020617 0%, #0F172A 30%, #1E1B4B 60%, #020617 100%);
             color: #F1F5F9;
             overflow-x: hidden;
             font-weight: 300;
@@ -38,95 +30,132 @@
             left: 50%;
             width: 150vw;
             height: 100vh;
-            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
             transform: translateX(-50%);
             z-index: 0;
             pointer-events: none;
         }
 
-        /* --- White Glassmorphism --- */
+        .cloud {
+            position: absolute;
+            background: white;
+            filter: blur(60px);
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: 1;
+            pointer-events: none;
+            animation: float-cloud 25s linear infinite;
+        }
+
+        @keyframes float-cloud {
+            from { transform: translateX(-100vw); }
+            to { transform: translateX(100vw); }
+        }
+
+        /* --- 3D Flip Card System --- */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            max-width: 290px;
+            height: 480px;
+            perspective: 1000px;
+            margin: 0 auto;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 2rem;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .flip-card-front {
+            background-color: #FFFFFF;
+            color: #1E293B;
+            padding: 1.25rem;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
+            color: #1E293B;
+            transform: rotateY(180deg);
+            justify-content: center;
+            padding: 1.5rem;
+            border: 2px solid var(--sky-blue);
+        }
+
+        /* Image frame styling */
+        .img-frame {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border: 2px solid #F0F9FF;
+            padding: 0.6rem;
+            border-radius: 1.5rem;
+            background: #F8FAFC;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .candidate-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+
+        /* --- UI Components --- */
         .glass-card {
             background: var(--glass-white);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 2rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
             color: #1E293B;
-        }
-        
-        .glass-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .team-card-unified {
-            background: #FFFFFF;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-            color: #1E293B;
-        }
-
-        .team-card-unified:hover {
-            transform: translateY(-10px);
-            border-color: var(--sky-blue);
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
-        }
-
-        /* --- Animations --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .hero-title-glow {
             color: #FFFFFF;
             font-weight: 600;
-            text-shadow: 
-                0 0 15px rgba(56, 189, 248, 0.8),
-                0 0 30px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.8), 0 0 30px rgba(56, 189, 248, 0.4);
             animation: neon-pulse 4s ease-in-out infinite;
         }
 
         @keyframes neon-pulse {
-            0%, 100% { text-shadow: 0 0 15px rgba(56, 189, 248, 0.7); opacity: 1; }
-            50% { text-shadow: 0 0 30px rgba(56, 189, 248, 1); opacity: 0.95; }
+            0%, 100% { opacity: 1; text-shadow: 0 0 15px rgba(56, 189, 248, 0.7); }
+            50% { opacity: 0.95; text-shadow: 0 0 35px rgba(56, 189, 248, 1); }
         }
 
         .star {
             animation: twinkle var(--duration) ease-in-out infinite;
         }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); }
-        }
-
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #020617; }
         ::-webkit-scrollbar-thumb { background: #FFFFFF; border-radius: 10px; }
 
-        .btn-loading {
-            pointer-events: none;
-            opacity: 0.7;
+        .counter-glow {
+            text-shadow: 0 0 30px rgba(56, 189, 248, 0.8);
         }
-
-        /* Avatar / upload styles */
-        .avatar-placeholder { transition: opacity .2s; }
-        .avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0.75rem; }
-        .upload-btn { background: rgba(2,6,23,0.5); border-radius: 999px; padding: .5rem; color: white; display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
@@ -134,12 +163,12 @@
     <div class="sky-beam"></div>
     <div id="clouds-container" class="relative opacity-20"></div>
 
-    <!-- Navigation -->
+    <!-- Navbar -->
     <nav class="fixed w-full z-[100] transition-all duration-500 px-8 py-6" id="navbar">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-sky-500/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-sky-400/30">
-                    <i class="fas fa-bolt text-sky-500"></i>
+                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center overflow-hidden border border-sky-400/30 shadow-sm transition-transform hover:scale-105">
+                    <img src="image/logo.jpg" alt="RMUTT LIGHT Logo" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/50?text=LIGHT'">
                 </div>
                 <span class="font-semibold tracking-tighter text-xl uppercase text-white transition-colors duration-500" id="nav-text">RMUTT <span class="text-sky-400">LIGHT</span></span>
             </div>
@@ -156,7 +185,7 @@
     <header id="home" class="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div class="relative z-10 text-center px-6">
             <div class="reveal active">
-                <div class="inline-block px-4 py-1 bg-sky-500/10 backdrop-blur-md border border-sky-400/20 rounded-full mb-6">
+                <div class="inline-block px-4 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-6">
                     <p class="text-sky-400 font-medium tracking-[0.2em] text-[10px] uppercase">ผู้ลงสมัครรับเลือกตั้งองค์การนักศึกษา 2569</p>
                 </div>
                 <h1 class="text-6xl md:text-[8.5rem] font-semibold leading-none mb-6 tracking-tighter hero-title-glow" id="hero-title">
@@ -172,29 +201,29 @@
                     <span class="block text-2xl md:text-4xl font-medium text-sky-400 italic leading-snug">Lead the Future.</span>
                 </div>
                 <div class="flex gap-4 opacity-0 translate-y-10 transition-all duration-1000 delay-700" id="hero-btns">
-                    <button onclick="document.getElementById('policy').scrollIntoView()" class="px-8 py-3.5 bg-sky-600 text-white font-medium rounded-2xl shadow-[0_0_20px_rgba(2,132,199,0.5)] hover:bg-sky-500 hover:scale-105 transition-all text-sm">ดูนโยบายของเรา</button>
-                    <button onclick="document.getElementById('team').scrollIntoView()" class="px-8 py-3.5 bg-white/10 backdrop-blur-md text-white font-medium rounded-2xl border border-white/30 hover:bg-white/20 transition-all shadow-sm text-sm">คณะทำงาน</button>
+                    <button onclick="document.getElementById('policy').scrollIntoView()" class="px-8 py-3.5 bg-sky-600 text-white font-medium rounded-2xl shadow-lg hover:bg-sky-700 transition-all text-sm">ดูนโยบายของเรา</button>
+                    <button onclick="document.getElementById('team').scrollIntoView()" class="px-8 py-3.5 bg-white/10 backdrop-blur-md text-white font-medium rounded-2xl border border-white/20 transition-all text-sm">ทีมผู้สมัคร</button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="py-32 relative px-6">
+    <!-- Vision Section -->
+    <section id="about" class="py-20 relative px-6"> <!-- Reduced py-32 to py-20 -->
         <div class="max-w-5xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="reveal">
                     <h2 class="text-[10px] font-semibold text-sky-400 tracking-[0.4em] mb-4 uppercase">OUR PHILOSOPHY</h2>
-                    <h3 class="text-3xl md:text-5xl font-semibold mb-8 leading-tight text-white">ท้องฟ้าที่กว้างใหญ่<br><span class="text-sky-400 italic font-light">เริ่มต้นที่ก้าวแรกของเรา</span></h3>
+                    <h3 class="text-3xl md:text-5xl font-semibold mb-6 leading-tight text-white">ท้องฟ้าที่กว้างใหญ่<br><span class="text-sky-400 italic font-light">เริ่มต้นที่ก้าวแรกของเรา</span></h3>
                     <p class="text-lg text-slate-300 leading-relaxed mb-8 font-light">
                         เราเปรียบเสมือน <span class="text-sky-400 font-medium">"รุ่งอรุณ"</span> ที่พร้อมจะส่องสว่างให้เห็นทุกปัญหา และพร้อมจะเป็น <span class="text-white font-medium">"ลมใต้ปีก"</span> ที่ส่งเสริมให้นักศึกษาทุกคนโบยบินไปสู่ความสำเร็จ
                     </p>
                 </div>
-                <div class="space-y-6">
-                    <div class="glass-card p-7 reveal" style="transition-delay: 200ms;">
+                <div class="space-y-4 text-slate-900">
+                    <div class="glass-card p-6 reveal" style="transition-delay: 200ms;">
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 bg-sky-500/10 rounded-2xl flex items-center justify-center text-sky-600 shrink-0 border border-sky-400/20">
-                                <i class="fas fa-feather-alt"></i>
+                                <i class="fas fa-feather-alt text-xl"></i>
                             </div>
                             <div>
                                 <h4 class="text-lg font-semibold mb-1">อิสระและการรับฟัง</h4>
@@ -202,10 +231,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="glass-card p-7 reveal" style="transition-delay: 400ms;">
+                    <div class="glass-card p-6 reveal" style="transition-delay: 400ms;">
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 bg-sky-500/10 rounded-2xl flex items-center justify-center text-sky-600 shrink-0 border border-sky-400/20">
-                                <i class="fas fa-paper-plane"></i>
+                                <i class="fas fa-paper-plane text-xl"></i>
                             </div>
                             <div>
                                 <h4 class="text-lg font-semibold mb-1">ก้าวไปสู่อนาคตที่ดีกว่า</h4>
@@ -219,81 +248,92 @@
     </section>
 
     <!-- Policy Section -->
-    <section id="policy" class="py-32 px-6 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-24 reveal">
-                <h2 class="text-[10px] font-semibold text-sky-400 tracking-[0.5em] mb-6 uppercase">POLICIES FOR PROGRESS</h2>
-                <h3 class="text-4xl md:text-6xl font-semibold mb-6 text-white leading-tight">Skill & Active Campus</h3>
+    <section id="policy" class="py-20 px-6 relative overflow-hidden"> <!-- Reduced py-32 to py-20 -->
+        <div class="max-w-7xl mx-auto relative z-10 text-center">
+            <div class="mb-12 reveal"> <!-- Reduced mb-24 to mb-12 -->
+                <h2 class="text-lg md:text-2xl font-semibold text-sky-400 tracking-[0.5em] mb-4 uppercase">POLICIES FOR PROGRESS</h2>
+                <h3 class="text-4xl md:text-7xl font-semibold mb-4 text-white leading-tight uppercase">Skill & Active Campus</h3>
                 <p class="text-lg md:text-xl font-light text-sky-300/70 italic leading-relaxed">“พื้นที่แห่งโอกาส ที่ทุกคนสามารถเปล่งประกายได้จริง”</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card p-10 text-center reveal">
-                    <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center text-2xl text-sky-600 mb-8 mx-auto border border-sky-400/20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="glass-card p-8 reveal shadow-xl">
+                    <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center text-2xl text-sky-600 mb-6 mx-auto border border-sky-400/20">
                         <i class="fas fa-rocket"></i>
                     </div>
-                    <h4 class="text-xl font-semibold mb-4">Practical Skills</h4>
-                    <p class="text-slate-600 leading-relaxed font-light text-sm">เวิร์กชอปที่สอนโดยผู้เชี่ยวชาญ เพื่อให้คุณพร้อมตั้งแต่วันแรกที่จบการศึกษา</p>
+                    <h4 class="text-xl font-semibold mb-3">Practical Skills</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed font-light">เวิร์กชอปทักษะที่ใช้ได้จริง เพื่อเตรียมความพร้อมสู่โลกการทำงาน</p>
                 </div>
-                <div class="glass-card p-10 text-center reveal" style="transition-delay: 100ms;">
-                    <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center text-2xl text-sky-600 mb-8 mx-auto border border-sky-400/20">
+                <div class="glass-card p-8 reveal shadow-xl" style="transition-delay: 150ms;">
+                    <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center text-2xl text-sky-600 mb-6 mx-auto border border-sky-400/20">
                         <i class="fas fa-medal"></i>
                     </div>
-                    <h4 class="text-xl font-semibold mb-4">Digital Credentials</h4>
-                    <p class="text-slate-600 leading-relaxed font-light text-sm">สะสมทักษะผ่านระบบดิจิทัล สร้าง Portfolio ที่แข็งแกร่งและน่าเชื่อถือ</p>
+                    <h4 class="text-xl font-semibold mb-3">Digital Credentials</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed font-light">ระบบสะสมเกียรติบัตรและทักษะดิจิทัล สร้าง Portfolio ที่น่าเชื่อถือ</p>
                 </div>
-                <div class="glass-card p-10 text-center reveal" style="transition-delay: 200ms;">
-                    <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center text-2xl text-sky-600 mb-8 mx-auto border border-sky-400/20">
+                <div class="glass-card p-8 reveal shadow-xl" style="transition-delay: 300ms;">
+                    <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center text-2xl text-sky-600 mb-6 mx-auto border border-sky-400/20">
                         <i class="fas fa-globe-asia"></i>
                     </div>
-                    <h4 class="text-xl font-semibold mb-4">Open Ecosystem</h4>
-                    <p class="text-slate-600 leading-relaxed font-light text-sm">ทลายกำแพงระหว่างคณะ เปิดโอกาสให้ทุกคนได้เรียนรู้ข้ามสายงานอย่างอิสระ</p>
+                    <h4 class="text-xl font-semibold mb-3">Open Ecosystem</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed font-light">เปิดกว้างให้ทุกคณะเรียนรู้และสร้างสรรค์นวัตกรรมร่วมกันได้อย่างอิสระ</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Voice Counter Section (Updated with Cloud Storage) -->
-    <section class="py-32 text-center relative px-6 z-10 overflow-hidden">
+    <!-- Voice Counter Section -->
+    <section class="py-16 text-center relative px-6 z-10 overflow-hidden"> <!-- Reduced py-32 to py-16 -->
         <div class="max-w-4xl mx-auto reveal">
-            <h2 class="text-2xl md:text-4xl font-semibold mb-6 text-white leading-relaxed">ร่วมเป็นส่วนหนึ่งของแสงสว่าง</h2>
-            <p class="text-slate-400 mb-10 text-base font-light">ทุกๆ การคลิก คือหนึ่งพลังเสียงที่พร้อมจะขับเคลื่อนมหาวิทยาลัยของเรา (ยอดสะสมจากทุกคน)</p>
-            <div class="relative inline-block group cursor-pointer" onclick="clickCountPersistent()">
+            <h2 class="text-3xl md:text-5xl font-semibold mb-4 text-white uppercase tracking-wider">ร่วมเป็นส่วนหนึ่งของแสงสว่าง</h2>
+            <p class="text-slate-400 mb-8 text-base font-light italic">เสียงของคุณคือแรงขับเคลื่อนสู่อนาคตที่ใช่ (ยอดสะสมจากทุกคน)</p>
+            
+            <div class="relative inline-block group cursor-pointer mb-8" onclick="handleVoiceClick()" id="click-area">
                 <div class="absolute inset-0 bg-sky-400 rounded-full blur-3xl opacity-10 group-hover:opacity-40 transition-all duration-1000"></div>
-                <div class="relative w-28 h-28 md:w-36 md:h-36 rounded-full border border-sky-400/30 bg-sky-500/10 backdrop-blur-md flex items-center justify-center group-active:scale-90 transition-all shadow-[0_0_40px_rgba(56,189,248,0.2)]">
-                    <i class="fas fa-hand-pointer text-3xl text-sky-400 animate-bounce"></i>
+                <div class="relative w-28 h-28 md:w-36 md:h-36 rounded-full border border-sky-400/30 bg-sky-500/10 backdrop-blur-md flex items-center justify-center group-active:scale-95 transition-all shadow-xl">
+                    <i class="fas fa-hand-pointer text-4xl text-sky-400 animate-bounce"></i>
                 </div>
             </div>
-            <div class="mt-10">
-                <span class="text-[9px] tracking-[0.4em] text-slate-500 uppercase block mb-2 font-semibold">พลังเสียงที่รวบรวมได้ขณะนี้</span>
-                <span class="text-5xl md:text-7xl font-semibold text-sky-400 tabular-nums" style="text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);" id="counter">0</span>
+            
+            <div class="mt-4">
+                <span class="text-xs md:text-sm tracking-[0.4em] text-slate-500 uppercase block mb-2 font-semibold">พลังเสียงรวบรวมได้ขณะนี้</span>
+                <span class="text-7xl md:text-[9rem] font-bold text-sky-400 tabular-nums counter-glow leading-none" id="counter">0</span>
             </div>
         </div>
     </section>
 
-    <!-- ✨ Voice of RMUTT Section (Student Suggestion Box) -->
-    <section id="suggestions" class="py-32 relative px-6 z-10">
-        <div class="max-w-4xl mx-auto">
-            <div class="glass-card p-8 md:p-12 reveal shadow-2xl">
-                <div class="text-center mb-10">
-                    <h2 class="text-[10px] font-semibold text-sky-600 tracking-[0.4em] mb-4 uppercase">VOICE OF STUDENT</h2>
-                    <h3 class="text-2xl md:text-4xl font-semibold text-slate-800 mb-4">✨ เสียงของคุณคือแสงสว่างของเรา</h3>
-                    <p class="text-slate-600 font-light text-sm md:text-base leading-relaxed">
-                        เราพร้อมรับฟังทุกปัญหาและข้อเสนอแนะเพื่อนำไปพัฒนา RMUTT ให้ดียิ่งขึ้น ข้อมูลของคุณจะถูกเก็บเป็นความลับและส่งถึงทีมงานโดยตรง
-                    </p>
+    <!-- Student Voice Box -->
+    <section id="suggestions" class="py-20 relative px-6 z-10">
+        <div class="max-w-3xl mx-auto">
+            <div class="glass-card p-10 md:p-14 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 opacity-5">
+                    <i class="fas fa-comments text-[15rem]"></i>
                 </div>
-                
-                <div class="space-y-6">
-                    <textarea id="suggestion-input" 
-                        class="w-full h-32 p-5 bg-white border border-sky-100 rounded-[2rem] focus:outline-none focus:ring-2 focus:ring-sky-400/30 transition-all text-slate-800 placeholder:text-slate-400 font-light text-sm md:text-base"
-                        placeholder="พิมพ์ปัญหาหรือข้อเสนอแนะของคุณที่นี่..."></textarea>
-                    
-                    <div class="flex flex-col items-center">
-                        <button id="submit-btn" onclick="submitSuggestion()" class="px-10 py-4 bg-sky-600 text-white font-medium rounded-2xl shadow-lg hover:bg-sky-700 hover:scale-105 transition-all flex items-center gap-3">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>ส่งข้อความถึงทีมงาน</span>
-                        </button>
-                        <p id="submit-status" class="mt-4 text-xs font-medium hidden"></p>
+                <div class="relative z-10">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-semibold text-slate-800 mb-4 uppercase">กล่องรับฟังความคิดเห็น</h3>
+                        <p class="text-slate-600 font-light text-base italic">"เราสัญญาว่าจะรับฟังทุกเสียงด้วยหัวใจ เพื่อ RMUTT ที่ดีกว่า"</p>
+                    </div>
+                    <div class="space-y-6">
+                        <textarea id="suggestion-input" class="w-full h-40 p-6 bg-white border border-slate-200 rounded-[2rem] focus:outline-none focus:ring-4 focus:ring-sky-500/10 text-slate-800 text-base shadow-inner transition-all" placeholder="ระบุปัญหา ความต้องการ หรือข้อเสนอแนะของคุณที่นี่..."></textarea>
+                        <div class="flex flex-col items-center gap-6">
+                            <button onclick="submitSuggestion()" id="submit-btn" class="px-12 py-4 bg-sky-600 text-white font-medium rounded-2xl hover:bg-sky-700 transition-all shadow-xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95">
+                                <i class="fas fa-paper-plane"></i> 
+                                <span>ส่งเสียงของคุณถึงทีมงาน</span>
+                            </button>
+                            <p id="submit-status" class="text-center text-sm font-medium hidden"></p>
+                        </div>
+                    </div>
+                    <div class="mt-12 pt-10 border-t border-slate-100 flex flex-col items-center">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6 text-center">ติดตามความเคลื่อนไหวของเรา</p>
+                        <div class="flex gap-8">
+                            <a href="https://www.facebook.com/alpharmutt?locale=th_TH" target="_blank" class="w-12 h-12 bg-[#1877F2] text-white rounded-2xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="https://www.instagram.com/rmutt_light01?igsh=aHk1OXZ4cXVrbnZ5" target="_blank" class="w-12 h-12 bg-gradient-to-tr from-[#F58529] via-[#D62976] to-[#962FBF] text-white rounded-2xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -301,168 +341,144 @@
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="py-32 px-6 relative overflow-hidden">
+    <section id="team" class="py-20 px-6 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full pointer-events-none" id="star-field"></div>
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-24 reveal">
-                <h2 class="text-[10px] font-semibold text-sky-400 tracking-[0.4em] mb-4 uppercase">OUR STELLAR TEAM</h2>
-                <h3 class="text-3xl md:text-5xl font-semibold text-white leading-tight">ผู้สมัครทีม RMUTT LIGHT 2569</h3>
-                <div class="w-20 h-0.5 bg-sky-500 mx-auto mt-8"></div>
+        <div class="max-w-7xl mx-auto relative z-10 text-center">
+            <div class="mb-16 reveal">
+                <h2 class="text-lg md:text-5xl font-semibold text-white leading-tight uppercase tracking-widest">ผู้ลงสมัครเลือกตั้งคณะกรรมการบริหารองค์การนักศึกษา</h2>
+                <h3 class="text-lg md:text-xl font-medium text-sky-400 mt-4 uppercase tracking-[0.3em]">มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรีประจำปีการศึกษา 2569</h3>
+                <div class="w-20 h-0.5 bg-sky-500 mx-auto mt-8 shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
             </div>
 
-            <!-- Tier 1: President (White Card) -->
-            <div class="flex justify-center mb-16 reveal">
-                <div class="team-card-unified p-7 rounded-[3rem] text-center border-sky-400/20">
-                    <div class="aspect-[4/5] bg-sky-50 rounded-2xl mb-6 overflow-hidden relative flex items-center justify-center border border-sky-100 group">
-                        <i class="fas fa-user-tie text-5xl text-sky-600 opacity-20 transition-all"></i>
-                        <div class="absolute inset-0 bg-gradient-to-t from-sky-500/5 to-transparent"></div>
-                    </div>
-                    <div class="space-y-1">
-                        <span class="text-[8px] font-semibold text-sky-600 tracking-widest uppercase mb-1 block">นายกองค์การนักศึกษา</span>
-                        <h4 class="text-lg font-semibold leading-snug text-slate-800">กิตติธัช เพชรประยูร</h4>
-                        <p class="text-[9px] text-slate-400 mb-4 uppercase tracking-widest font-normal">Kittithat Petchprayoon</p>
-                        <div class="py-4 border-t border-slate-100">
-                            <p class="text-[10px] font-semibold text-sky-600 mb-2">คณะวิศวกรรมศาสตร์</p>
-                            <p class="text-[9px] text-slate-500 italic font-light leading-relaxed px-2">"ความรับผิดชอบและการรับฟังคือจุดเริ่มต้นของการพัฒนา"</p>
+            <!-- Tier 1: President -->
+            <div class="flex justify-center mb-24 reveal">
+                <div class="flip-card">
+                    <div class="flip-card-inner shadow-2xl">
+                        <div class="flip-card-front">
+                            <div class="img-frame">
+                                <img src="image/li_1.PNG" alt="นายกองค์การนักศึกษา" class="candidate-img" onerror="this.src='https://via.placeholder.com/300x400?text=RMUTT+LIGHT'">
+                            </div>
+                            <div class="pb-4 px-4 text-slate-800">
+                                <span class="text-[11px] font-semibold text-sky-600 uppercase tracking-widest block mb-1">นายกองค์การนักศึกษา</span>
+                                <h4 class="text-base font-semibold leading-tight">กิตติธัช เพชรประยูร</h4>
+                                <p class="text-[10px] text-slate-400 uppercase font-normal mt-1">คณะวิศวกรรมศาสตร์</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fas fa-quote-left text-sky-300 text-3xl mb-6"></i>
+                            <p class="text-lg italic font-medium leading-relaxed">"ความรับผิดชอบและการรับฟังคือจุดเริ่มต้นของการพัฒนาที่ยั่งยืน"</p>
+                            <div class="mt-8 pt-6 border-t border-slate-200">
+                                <p class="text-[10px] font-semibold text-sky-600 uppercase tracking-widest">MR. KITTITHAT PETCHPRAYOON</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tier 2: Remaining Team (White Cards) -->
-            <div id="team-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <!-- Tier 2: Remaining Team -->
+            <div id="team-grid" class="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-12 max-w-4xl mx-auto">
                 <!-- JS Injected -->
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-24 bg-black/40 backdrop-blur-md text-white px-8 text-center relative border-t border-white/5">
-        <div class="max-w-7xl mx-auto reveal relative z-10">
-            <div class="text-3xl font-semibold mb-4 tracking-tighter uppercase">RMUTT <span class="text-sky-400">LIGHT</span></div>
-            <p class="text-sky-400/60 tracking-[0.5em] text-[10px] font-medium mb-12 uppercase">Light the Voice. Lead the Future.</p>
-            <div class="flex justify-center gap-6 mb-16">
-                <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-sky-500 transition-all text-sm"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-sky-500 transition-all text-sm"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-sky-500 transition-all text-sm"><i class="fab fa-tiktok"></i></a>
+    <footer class="py-16 bg-black/40 text-center border-t border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-2xl font-semibold mb-4 tracking-tighter uppercase">RMUTT <span class="text-sky-400">LIGHT</span></div>
+            <p class="text-sky-500/60 tracking-[0.5em] text-[10px] font-medium uppercase mb-10">Light the Voice. Lead the Future.</p>
+            <div class="flex justify-center gap-8 mb-10 opacity-70">
+                <a href="https://www.facebook.com/alpharmutt?locale=th_TH" target="_blank" class="hover:text-sky-400 transition-all text-2xl hover:scale-125"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/rmutt_light01?igsh=aHk1OXZ4cXVrbnZ5" target="_blank" class="hover:text-pink-500 transition-all text-2xl hover:scale-125"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="pt-8 border-t border-white/5 opacity-40">
+            <div class="pt-8 border-t border-white/5">
+                <p class="text-[9px] text-white/20 tracking-[0.4em] uppercase">#RMUTTLIGHT #RMUTT2569 #LIGHTTHEVOICE</p>
+            </div>
+        </div>
+    </footer>
+
     <!-- Firebase System -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, onSnapshot, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, updateDoc, collection, addDoc, onSnapshot, increment, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Global config from environment
         const firebaseConfig = JSON.parse(__firebase_config);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rmutt-light-app';
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rmutt-light-v3';
         
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        let currentUser = null;
+        let user = null;
+        let localCount = 0;
 
-        // Initialize Auth and Counter
-        async function initApp() {
+        async function init() {
             try {
-                const userCredential = await signInAnonymously(auth);
-                currentUser = userCredential.user;
-                console.log("Logged in anonymously as:", currentUser.uid);
-                
-                // Set up real-time listener for persistent counter
-                const counterDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'voice_counter');
-                
-                // Create document if it doesn't exist
-                const docSnap = await getDoc(counterDocRef);
-                if (!docSnap.exists()) {
-                    await setDoc(counterDocRef, { count: 0 });
+                const cred = await signInAnonymously(auth);
+                user = cred.user;
+                const counterRef = doc(db, 'artifacts', appId, 'public', 'data', 'voice_stats', 'global_counter');
+                const snapInit = await getDoc(counterRef);
+                if (!snapInit.exists()) {
+                    await setDoc(counterRef, { count: 0 });
                 }
-
-                onSnapshot(counterDocRef, (doc) => {
-                    if (doc.exists()) {
-                        const total = doc.data().count || 0;
-                        document.getElementById('counter').innerText = total.toLocaleString();
+                onSnapshot(counterRef, (snap) => {
+                    if (snap.exists()) {
+                        localCount = snap.data().count || 0;
+                        document.getElementById('counter').innerText = localCount.toLocaleString();
                     }
-                }, (error) => console.error("Snapshot error:", error));
-
-            } catch (error) {
-                console.error("Auth error:", error);
-            }
+                });
+            } catch (e) { console.warn("Firebase Init failed."); }
         }
 
-        // Persistent Click Counter Function
-        window.clickCountPersistent = async function() {
-            if (!currentUser) return;
-            
-            const counterDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'voice_counter');
-            try {
-                // Visual feedback immediate
-                const counterEl = document.getElementById('counter');
-                counterEl.style.transform = 'scale(1.1)';
-                setTimeout(() => counterEl.style.transform = 'scale(1)', 100);
-
-                // Update Firestore atomically
-                await updateDoc(counterDocRef, {
-                    count: increment(1)
-                });
-            } catch (e) {
-                console.error("Update error:", e);
-            }
+        window.handleVoiceClick = async function() {
+            const el = document.getElementById('click-area');
+            const counterEl = document.getElementById('counter');
+            el.classList.add('scale-90');
+            setTimeout(() => el.classList.remove('scale-90'), 100);
+            localCount++;
+            counterEl.innerText = localCount.toLocaleString();
+            if (!user) return;
+            const counterRef = doc(db, 'artifacts', appId, 'public', 'data', 'voice_stats', 'global_counter');
+            try { await updateDoc(counterRef, { count: increment(1) }); } catch (e) {}
         };
 
-        // Submit Suggestion Function
         window.submitSuggestion = async function() {
-            const inputField = document.getElementById('suggestion-input');
-            const statusText = document.getElementById('submit-status');
+            const input = document.getElementById('suggestion-input');
             const btn = document.getElementById('submit-btn');
-            const text = inputField.value.trim();
-
-            if (!text || !currentUser) return;
-
-            btn.classList.add('btn-loading');
-            statusText.innerText = "กำลังส่งข้อมูล...";
-            statusText.classList.remove('hidden', 'text-green-400', 'text-red-400');
-            statusText.classList.add('text-sky-400');
-
+            const status = document.getElementById('submit-status');
+            const msg = input.value.trim();
+            if (!msg || !user) return;
+            btn.disabled = true;
+            status.innerText = "กำลังส่งข้อมูล...";
+            status.classList.remove('hidden', 'text-green-500', 'text-red-500');
             try {
-                const suggestionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'suggestions');
-                await addDoc(suggestionsCol, {
-                    message: text,
-                    timestamp: new Date().toISOString(),
-                    userId: currentUser.uid
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'suggestions'), {
+                    message: msg, timestamp: new Date().toISOString(), uid: user.uid
                 });
-
-                inputField.value = "";
-                statusText.innerText = "ส่งข้อความเรียบร้อยแล้ว ขอบคุณสำหรับความคิดเห็นครับ!";
-                statusText.classList.replace('text-sky-400', 'text-green-400');
+                input.value = "";
+                status.innerText = "ส่งเสียงเรียบร้อยแล้ว ขอบคุณที่ร่วมเป็นส่วนหนึ่งครับ!";
+                status.classList.add('text-green-500');
             } catch (e) {
-                console.error("Submission error:", e);
-                statusText.innerText = "เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง";
-                statusText.classList.replace('text-sky-400', 'text-red-400');
+                status.innerText = "เกิดข้อผิดพลาดในการส่งข้อมูล";
+                status.classList.add('text-red-500');
             } finally {
-                btn.classList.remove('btn-loading');
-                setTimeout(() => statusText.classList.add('hidden'), 5000);
+                btn.disabled = false;
+                setTimeout(() => status.classList.add('hidden'), 5000);
             }
         };
-
-        initApp();
+        init();
     </script>
 
     <script>
-        // --- Visual UI Scripts ---
         const cloudsContainer = document.getElementById('clouds-container');
         for (let i = 0; i < 6; i++) {
             const cloud = document.createElement('div');
             cloud.className = 'cloud';
-            const size = Math.random() * 200 + 200;
+            const size = 200 + Math.random() * 200;
             cloud.style.cssText = `
-                position: absolute;
-                background: white;
-                filter: blur(60px);
-                border-radius: 50%;
-                width: ${size}px; height: ${size * 0.6}px;
-                top: ${Math.random() * 80}vh;
+                position: absolute; background: white; filter: blur(60px); border-radius: 50%;
+                width: ${size}px; height: ${size * 0.6}px; top: ${Math.random() * 80}vh;
                 animation: float-cloud ${20 + Math.random() * 10}s linear infinite;
                 animation-delay: -${Math.random() * 20}s;
             `;
@@ -470,20 +486,59 @@
         }
 
         const starField = document.getElementById('star-field');
-        function createStars() {
-            for (let i = 0; i < 300; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 2;
-                star.style.position = 'absolute'; star.style.width = size + 'px'; star.style.height = size + 'px';
-                star.style.background = 'white'; star.style.borderRadius = '50%';
-                star.style.top = Math.random() * 100 + '%'; star.style.left = Math.random() * 100 + '%';
-                star.style.opacity = Math.random() * 0.7;
-                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-                starField.appendChild(star);
-            }
+        for (let i = 0; i < 300; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.cssText = `
+                position: absolute; width: ${Math.random() * 2}px; height: ${Math.random() * 2}px;
+                background: white; border-radius: 50%; top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;
+                --duration: ${2 + Math.random() * 3}s; opacity: ${Math.random()};
+            `;
+            starField.appendChild(star);
         }
-        createStars();
+
+        const members = [
+            { pos: "อุปนายกคนที่ 1", name: "คมชาญ เต็งหิรัญ", en: "COMCHAH TENGHIRAN", faculty: "คณะวิศวกรรมศาสตร์", quote: "ความเปลี่ยนแปลงที่ยั่งยืนเริ่มต้นที่การลงมือทำจริง", img: "image/li_2.png" },
+            { pos: "อุปนายกคนที่ 2", name: "ธนากร ปานแก้ว", en: "THANAKORN PANKAEW", faculty: "คณะบริหารธุรกิจ", quote: "ทุกความคิดสร้างสรรค์มีค่าและควรได้รับแรงสนับสนุน", img: "image/li_3.png" },
+            { pos: "เลขานุการ", name: "พิลุณ บุญเลิศ", en: "PILOON BOONLEART", faculty: "คณะบริหารธุรกิจ", quote: "ความโปร่งใสคือรากฐานของความเชื่อมั่นในองค์กร", img: "image/li_4.png" },
+            { pos: "ผู้ช่วยเลขานุการ", name: "จิระยุทธ ถมมา", en: "JIRAYUT THOMMA", faculty: "คณะศิลปศาสตร์", quote: "เราจะเชื่อมโยงทุกเสียงของเพื่อนนักศึกษาให้เป็นหนึ่งเดียว", img: "image/li_5.png" },
+            { pos: "เหรัญญิก", name: "ปรัตถกร คชบุตร", en: "PRARATTAKORN KHOTCHABUT", faculty: "คณะวิศวกรรมศาสตร์", quote: "บริหารจัดการด้วยความเที่ยงธรรมและเกิดประโยชน์สูงสุด", img: "image/li_16.png" },
+            { pos: "ผู้ช่วยเหรัญญิก", name: "พรไพลิน ดำวอ", en: "PHONPHAILIN DUMVO", faculty: "คณะวิศวกรรมศาสตร์", quote: "การเป็นผู้นำคือการเป็นตัวอย่างที่ดีให้กับผู้อื่น", img: "image/li_7.png" },
+            { pos: "ประธานฝ่ายนักศึกษาสัมพันธ์", name: "วรัญญา ดอกจันทร์", en: "WARANYA DOKCHAN", faculty: "คณะบริหารธุรกิจ", quote: "การสื่อสารอย่างมีประสิทธิภาพคือกุญแจสำคัญ", img: "image/li_8.png" },
+            { pos: "ประธานฝ่ายส่งเสริมวิชาการ", name: "อรปรียา สอนสระเกษ", en: "ONPREEYA SORNSAKET", faculty: "คณะบริหารธุรกิจ", quote: "การเรียนรู้ต้องอาศัยความกระตือรือร้นและมีวินัย", img: "image/li_9.png" },
+            { pos: "ประธานฝ่ายพัฒนาสังคมเเละบำเพ็ญประโยชน์", name: "สุรางคณา คุ้มสดวก", en: "SURANGKANA KOOMSADUAK", faculty: "คณะศิลปศาสตร์", quote: "สร้างความเปลี่ยนแปลงที่ยั่งยืนเพื่อให้ชุมชนได้รับประโยชน์", img: "image/li_10.png" },
+            { pos: "ประธานฝ่ายประชาสัมพันธ์", name: "เอมพิกา ศรีสกุล", en: "AEMPIKA SRISAKUL", faculty: "คณะบริหารธุรกิจ", quote: "สื่อสารอย่างโปร่งใสคือหัวใจสำคัญของภาพลักษณ์", img: "image/li_11.png" },
+            { pos: "ประธานฝ่ายศิลปวัฒนธรรม", name: "ศศิธร สุขพืชกิจ", en: "SASITHORN SUKPHUECHKIT", faculty: "คณะวิศวกรรมศาสตร์", quote: "ศิลปะและวัฒนธรรมทำให้ชีวิตมีความหมายมากขึ้น", img: "image/li_12.png" },
+            { pos: "ประธานฝ่ายกีฬา", name: "พศิน ท่าจอหอ", en: "PASIN THAJORHOR", faculty: "คณะวิศวกรรมศาสตร์", quote: "กีฬาคือโอกาสในการเติบโตของจิตใจและร่างกาย", img: "image/li_13.png" }
+        ];
+
+        const teamGrid = document.getElementById('team-grid');
+        members.forEach((m) => {
+            const card = document.createElement('div');
+            card.className = "flip-card reveal";
+            card.innerHTML = `
+                <div class="flip-card-inner shadow-xl">
+                    <div class="flip-card-front">
+                        <div class="img-frame">
+                            <img src="${m.img}" alt="${m.name}" class="candidate-img" onerror="this.src='https://via.placeholder.com/300x400?text=CANDIDATE'">
+                        </div>
+                        <div class="pb-2 px-4 text-slate-800">
+                            <span class="text-[10px] font-semibold text-sky-600 uppercase tracking-widest block mb-1">${m.pos}</span>
+                            <h4 class="text-base font-semibold leading-tight">${m.name}</h4>
+                            <p class="text-[9px] text-slate-400 uppercase font-normal mt-1">${m.faculty}</p>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <i class="fas fa-quote-left text-sky-300 text-2xl mb-4"></i>
+                        <p class="text-sm italic font-medium leading-relaxed px-4">"${m.quote}"</p>
+                        <div class="mt-6 pt-4 border-t border-slate-100">
+                            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">${m.en}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            teamGrid.appendChild(card);
+        });
 
         function reveal() {
             document.querySelectorAll(".reveal").forEach(r => {
@@ -491,60 +546,20 @@
             });
         }
         window.addEventListener("scroll", reveal);
-
         window.addEventListener("scroll", () => {
             const nav = document.getElementById('navbar');
-            const navBrand = document.getElementById('nav-text');
+            const navText = document.getElementById('nav-text');
             const navLinks = document.getElementById('nav-links');
-            
             if (window.scrollY > 50) {
                 nav.classList.add('bg-white/95', 'backdrop-blur-xl', 'py-4', 'shadow-lg');
-                navBrand.classList.replace('text-white', 'text-slate-800');
+                navText.classList.replace('text-white', 'text-slate-800');
                 navLinks.classList.replace('text-slate-300', 'text-slate-600');
             } else {
                 nav.classList.remove('bg-white/95', 'backdrop-blur-xl', 'py-4', 'shadow-lg');
-                navBrand.classList.replace('text-slate-800', 'text-white');
+                navText.classList.replace('text-slate-800', 'text-white');
                 navLinks.classList.replace('text-slate-600', 'text-slate-300');
             }
         });
-
-        const members = [
-            { pos: "อุปนายก คนที่ 1", name: "คมชาญ เต็งหิรัญ", en: "Comchah Tenghiran", faculty: "คณะวิศวกรรมศาสตร์", quote: "ความเปลี่ยนแปลงที่ยั่งยืนเริ่มต้นที่การลงมือทำจริง" },
-            { pos: "อุปนายก คนที่ 2", name: "ธนากร ปานแก้ว", en: "Thanakorn Pankaew", faculty: "คณะบริหารธุรกิจ", quote: "ทุกความคิดสร้างสรรค์มีค่าและควรได้รับแรงสนับสนุน" },
-            { pos: "เลขานุการ", name: "พิลุณ บุญเลิศ", en: "Piloon Boonleart", faculty: "คณะบริหารธุรกิจ", quote: "ความโปร่งใสคือรากฐานของความเชื่อมั่นในองค์กร" },
-            { pos: "ผู้ช่วยเลขานุการ", name: "จิระยุทธ ถมมา", en: "Jirayut Thomma", faculty: "คณะศิลปศาสตร์", quote: "เราจะเชื่อมโยงทุกเสียงของเพื่อนนักศึกษาให้เป็นหนึ่งเดียว" },
-            { pos: "เหรัญญิก", name: "ปรัตถกร คชบุตร", en: "Prarattakorn Khotchabut", faculty: "คณะวิศวกรรมศาสตร์", quote: "บริหารจัดการด้วยความเที่ยงธรรมและเกิดประโยชน์สูงสุด" },
-            { pos: "ผู้ช่วยเหรัญญิก", name: "พรไพลิน ดำวอ", en: "Phonphailin Dumvo", faculty: "คณะวิศวกรรมศาสตร์", quote: "การเป็นผู้นำคือการเป็นตัวอย่างที่ดีให้กับผู้อื่น" },
-            { pos: "ประธานฝ่ายนักศึกษาสัมพันธ์", name: "วรัญญา ดอกจันทร์", en: "Waranya Dokchan", faculty: "คณะบริหารธุรกิจ", quote: "การสื่อสารอย่างมีประสิทธิภาพคือกุญแจสำคัญ" },
-            { pos: "ประธานฝ่ายส่งเสริมวิชาการ", name: "อรปรียา สอนสระเกษ", en: "Onpreeya Sornsaket", faculty: "คณะบริหารธุรกิจ", quote: "การเรียนรู้ต้องอาศัยความกระตือรือร้นและมีวินัย" },
-            { pos: "ประธานฝ่ายพัฒนาสังคม", name: "สุรางคณา คุ้มสดวก", en: "Surangkana Koomsaduak", faculty: "คณะบริหารธุรกิจ", quote: "สร้างความเปลี่ยนแปลงที่ยั่งยืนเพื่อให้ชุมชนได้รับประโยชน์" },
-            { pos: "ประธานฝ่ายประชาสัมพันธ์", name: "เอมพิกา ศรีสกุล", en: "Aempika Srisakul", faculty: "คณะบริหารธุรกิจ", quote: "สื่อสารอย่างโปร่งใสคือหัวใจสำคัญของภาพลักษณ์" },
-            { pos: "ประธานฝ่ายศิลปวัฒนธรรม", name: "ศศิธร สุขพืชกิจ", en: "Sasithorn Sukphuechkit", faculty: "คณะวิศวกรรมศาสตร์", quote: "ศิลปะและวัฒนธรรมทำให้ชีวิตมีความหมายมากขึ้น" },
-            { pos: "ประธานฝ่ายกีฬา", name: "พศิน ท่าจอหอ", en: "Pasin Thajorhor", faculty: "คณะวิศวกรรมศาสตร์", quote: "กีฬาคือโอกาสในการเติบโตของจิตใจและร่างกาย" }
-        ];
-
-        const teamGrid = document.getElementById('team-grid');
-        members.forEach((m) => {
-            const card = document.createElement('div');
-            card.className = "team-card-unified p-7 rounded-[2.5rem] text-center reveal border border-slate-100";
-            card.innerHTML = `
-                <div class="aspect-[4/5] bg-sky-50 rounded-2xl mb-6 overflow-hidden relative flex items-center justify-center border border-sky-100 group">
-                    <i class="fas fa-user text-4xl text-sky-600 opacity-15 group-hover:opacity-30 transition-all"></i>
-                    <div class="absolute inset-0 bg-gradient-to-t from-sky-500/5 to-transparent"></div>
-                </div>
-                <div class="space-y-1">
-                    <span class="text-[8px] font-semibold text-sky-600 tracking-widest uppercase mb-1 block">${m.pos}</span>
-                    <h4 class="text-base font-semibold leading-snug text-slate-800">${m.name}</h4>
-                    <p class="text-[8px] text-slate-500 mb-4 uppercase tracking-widest font-normal">${m.en}</p>
-                    <div class="py-4 border-t border-slate-100">
-                        <p class="text-[10px] font-semibold text-sky-600 mb-2">${m.faculty}</p>
-                        <p class="text-[8px] text-slate-400 italic font-light leading-relaxed px-2">"${m.quote}"</p>
-                    </div>
-                </div>
-            `;
-            teamGrid.appendChild(card);
-        });
-
         window.onload = () => { reveal(); setTimeout(() => document.getElementById('hero-btns').classList.remove('opacity-0', 'translate-y-10'), 500); };
     </script>
 </body>
