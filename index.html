@@ -152,10 +152,6 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #020617; }
         ::-webkit-scrollbar-thumb { background: #FFFFFF; border-radius: 10px; }
-
-        .counter-glow {
-            text-shadow: 0 0 30px rgba(56, 189, 248, 0.8);
-        }
     </style>
 </head>
 <body>
@@ -186,7 +182,7 @@
         <div class="relative z-10 text-center px-6">
             <div class="reveal active">
                 <div class="inline-block px-4 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-6">
-                    <p class="text-sky-400 font-medium tracking-[0.2em] text-[10px] uppercase">ผู้ลงสมัครรับเลือกตั้งองค์การนักศึกษา 2569</p>
+                    <p class="text-sky-400 font-medium tracking-[0.2em] text-[20px] uppercase">ผู้ลงสมัครรับเลือกตั้งองค์การนักศึกษา 2569</p>
                 </div>
                 <h1 class="text-6xl md:text-[8.5rem] font-semibold leading-none mb-6 tracking-tighter hero-title-glow" id="hero-title">
                     RMUTT LIGHT
@@ -209,12 +205,12 @@
     </header>
 
     <!-- Vision Section -->
-    <section id="about" class="py-20 relative px-6"> <!-- Reduced py-32 to py-20 -->
+    <section id="about" class="py-20 relative px-6">
         <div class="max-w-5xl mx-auto">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="reveal">
                     <h2 class="text-[10px] font-semibold text-sky-400 tracking-[0.4em] mb-4 uppercase">OUR PHILOSOPHY</h2>
-                    <h3 class="text-3xl md:text-5xl font-semibold mb-6 leading-tight text-white">ท้องฟ้าที่กว้างใหญ่<br><span class="text-sky-400 italic font-light">เริ่มต้นที่ก้าวแรกของเรา</span></h3>
+                    <h3 class="text-3xl md:text-5xl font-semibold mb-8 leading-tight text-white">ท้องฟ้าที่กว้างใหญ่<br><span class="text-sky-400 italic font-light">เริ่มต้นที่ก้าวแรกของเรา</span></h3>
                     <p class="text-lg text-slate-300 leading-relaxed mb-8 font-light">
                         เราเปรียบเสมือน <span class="text-sky-400 font-medium">"รุ่งอรุณ"</span> ที่พร้อมจะส่องสว่างให้เห็นทุกปัญหา และพร้อมจะเป็น <span class="text-white font-medium">"ลมใต้ปีก"</span> ที่ส่งเสริมให้นักศึกษาทุกคนโบยบินไปสู่ความสำเร็จ
                     </p>
@@ -248,11 +244,11 @@
     </section>
 
     <!-- Policy Section -->
-    <section id="policy" class="py-20 px-6 relative overflow-hidden"> <!-- Reduced py-32 to py-20 -->
+    <section id="policy" class="py-20 px-6 relative overflow-hidden border-b border-white/5">
         <div class="max-w-7xl mx-auto relative z-10 text-center">
-            <div class="mb-12 reveal"> <!-- Reduced mb-24 to mb-12 -->
-                <h2 class="text-lg md:text-2xl font-semibold text-sky-400 tracking-[0.5em] mb-4 uppercase">POLICIES FOR PROGRESS</h2>
-                <h3 class="text-4xl md:text-7xl font-semibold mb-4 text-white leading-tight uppercase">Skill & Active Campus</h3>
+            <div class="mb-12 reveal">
+                <h2 class="text-[10px] font-semibold text-sky-400 tracking-[0.5em] mb-6 uppercase">POLICIES FOR PROGRESS</h2>
+                <h3 class="text-4xl md:text-6xl font-semibold mb-6 text-white leading-tight uppercase">Skill & Active Campus</h3>
                 <p class="text-lg md:text-xl font-light text-sky-300/70 italic leading-relaxed">“พื้นที่แห่งโอกาส ที่ทุกคนสามารถเปล่งประกายได้จริง”</p>
             </div>
 
@@ -272,7 +268,7 @@
                     <p class="text-slate-600 text-sm leading-relaxed font-light">ระบบสะสมเกียรติบัตรและทักษะดิจิทัล สร้าง Portfolio ที่น่าเชื่อถือ</p>
                 </div>
                 <div class="glass-card p-8 reveal shadow-xl" style="transition-delay: 300ms;">
-                    <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center text-2xl text-sky-600 mb-6 mx-auto border border-sky-400/20">
+                    <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center text-2xl text-sky-600 mb-8 mx-auto border border-sky-400/20">
                         <i class="fas fa-globe-asia"></i>
                     </div>
                     <h4 class="text-xl font-semibold mb-3">Open Ecosystem</h4>
@@ -282,59 +278,27 @@
         </div>
     </section>
 
-    <!-- Voice Counter Section -->
-    <section class="py-16 text-center relative px-6 z-10 overflow-hidden"> <!-- Reduced py-32 to py-16 -->
-        <div class="max-w-4xl mx-auto reveal">
-            <h2 class="text-3xl md:text-5xl font-semibold mb-4 text-white uppercase tracking-wider">ร่วมเป็นส่วนหนึ่งของแสงสว่าง</h2>
-            <p class="text-slate-400 mb-8 text-base font-light italic">เสียงของคุณคือแรงขับเคลื่อนสู่อนาคตที่ใช่ (ยอดสะสมจากทุกคน)</p>
-            
-            <div class="relative inline-block group cursor-pointer mb-8" onclick="handleVoiceClick()" id="click-area">
-                <div class="absolute inset-0 bg-sky-400 rounded-full blur-3xl opacity-10 group-hover:opacity-40 transition-all duration-1000"></div>
-                <div class="relative w-28 h-28 md:w-36 md:h-36 rounded-full border border-sky-400/30 bg-sky-500/10 backdrop-blur-md flex items-center justify-center group-active:scale-95 transition-all shadow-xl">
-                    <i class="fas fa-hand-pointer text-4xl text-sky-400 animate-bounce"></i>
-                </div>
-            </div>
-            
-            <div class="mt-4">
-                <span class="text-xs md:text-sm tracking-[0.4em] text-slate-500 uppercase block mb-2 font-semibold">พลังเสียงรวบรวมได้ขณะนี้</span>
-                <span class="text-7xl md:text-[9rem] font-bold text-sky-400 tabular-nums counter-glow leading-none" id="counter">0</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Student Voice Box -->
-    <section id="suggestions" class="py-20 relative px-6 z-10">
-        <div class="max-w-3xl mx-auto">
-            <div class="glass-card p-10 md:p-14 shadow-2xl relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 opacity-5">
-                    <i class="fas fa-comments text-[15rem]"></i>
-                </div>
-                <div class="relative z-10">
-                    <div class="text-center mb-8">
-                        <h3 class="text-3xl font-semibold text-slate-800 mb-4 uppercase">กล่องรับฟังความคิดเห็น</h3>
-                        <p class="text-slate-600 font-light text-base italic">"เราสัญญาว่าจะรับฟังทุกเสียงด้วยหัวใจ เพื่อ RMUTT ที่ดีกว่า"</p>
-                    </div>
-                    <div class="space-y-6">
-                        <textarea id="suggestion-input" class="w-full h-40 p-6 bg-white border border-slate-200 rounded-[2rem] focus:outline-none focus:ring-4 focus:ring-sky-500/10 text-slate-800 text-base shadow-inner transition-all" placeholder="ระบุปัญหา ความต้องการ หรือข้อเสนอแนะของคุณที่นี่..."></textarea>
-                        <div class="flex flex-col items-center gap-6">
-                            <button onclick="submitSuggestion()" id="submit-btn" class="px-12 py-4 bg-sky-600 text-white font-medium rounded-2xl hover:bg-sky-700 transition-all shadow-xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95">
-                                <i class="fas fa-paper-plane"></i> 
-                                <span>ส่งเสียงของคุณถึงทีมงาน</span>
-                            </button>
-                            <p id="submit-status" class="text-center text-sm font-medium hidden"></p>
+    <!-- Channels of Listening Section -->
+    <section id="feedback-channels" class="py-20 relative px-6 z-10 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="reveal">
+                <h2 class="text-3xl md:text-4xl font-semibold text-white mb-4 uppercase tracking-widest">ช่องทางรับฟังความคิดเห็น</h2>
+                <p class="text-slate-400 font-light text-base italic mb-12">"เรารับฟังทุกเสียงด้วยหัวใจ เพื่อ RMUTT ที่ดีกว่า"</p>
+                
+                <div class="flex justify-center gap-12 md:gap-16">
+                    <a href="https://www.facebook.com/alpharmutt?locale=th_TH" target="_blank" class="group flex flex-col items-center gap-4">
+                        <div class="w-20 h-20 md:w-24 md:h-24 bg-[#1877F2] text-white rounded-[2rem] flex items-center justify-center shadow-[0_0_30px_rgba(24,119,242,0.3)] group-hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-3xl md:text-4xl"></i>
                         </div>
-                    </div>
-                    <div class="mt-12 pt-10 border-t border-slate-100 flex flex-col items-center">
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6 text-center">ติดตามความเคลื่อนไหวของเรา</p>
-                        <div class="flex gap-8">
-                            <a href="https://www.facebook.com/alpharmutt?locale=th_TH" target="_blank" class="w-12 h-12 bg-[#1877F2] text-white rounded-2xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                <i class="fab fa-facebook-f text-xl"></i>
-                            </a>
-                            <a href="https://www.instagram.com/rmutt_light01?igsh=aHk1OXZ4cXVrbnZ5" target="_blank" class="w-12 h-12 bg-gradient-to-tr from-[#F58529] via-[#D62976] to-[#962FBF] text-white rounded-2xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                <i class="fab fa-instagram text-xl"></i>
-                            </a>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Facebook</span>
+                    </a>
+                    
+                    <a href="https://www.instagram.com/rmutt_light01?igsh=aHk1OXZ4cXVrbnZ5" target="_blank" class="group flex flex-col items-center gap-4">
+                        <div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-tr from-[#F58529] via-[#D62976] to-[#962FBF] text-white rounded-[2rem] flex items-center justify-center shadow-[0_0_30px_rgba(214,41,118,0.3)] group-hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-instagram text-3xl md:text-4xl"></i>
                         </div>
-                    </div>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Instagram</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -344,10 +308,11 @@
     <section id="team" class="py-20 px-6 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full pointer-events-none" id="star-field"></div>
         <div class="max-w-7xl mx-auto relative z-10 text-center">
-            <div class="mb-16 reveal">
-                <h2 class="text-lg md:text-5xl font-semibold text-white leading-tight uppercase tracking-widest">ผู้ลงสมัครเลือกตั้งคณะกรรมการบริหารองค์การนักศึกษา</h2>
-                <h3 class="text-lg md:text-xl font-medium text-sky-400 mt-4 uppercase tracking-[0.3em]">มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรีประจำปีการศึกษา 2569</h3>
-                <div class="w-20 h-0.5 bg-sky-500 mx-auto mt-8 shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
+            <!-- ปรับแก้ระยะห่างหัวข้อคณะกรรมการ -->
+            <div class="mb-12 reveal">
+                <h3 class="text-3xl md:text-5xl font-semibold text-white leading-tight uppercase ">ผู้ลงสมัครเลือกตั้งคณะกรรมการบริหารองค์การนักศึกษา</h3>
+                <h3 class="text-lg md:text-2xl font-medium text-sky-400 mt-1 uppercase ">มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรีประจำปีการศึกษา 2569</h3>
+                <div class="w-20 h-0.5 bg-sky-500 mx-auto mt-4 shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
             </div>
 
             <!-- Tier 1: President -->
@@ -356,12 +321,12 @@
                     <div class="flip-card-inner shadow-2xl">
                         <div class="flip-card-front">
                             <div class="img-frame">
-                                <img src="image/li_1.PNG" alt="นายกองค์การนักศึกษา" class="candidate-img" onerror="this.src='https://via.placeholder.com/300x400?text=RMUTT+LIGHT'">
+                                <img src="image/li_1.PNG" alt="นายกองค์การนักศึกษา" class="candidate-img" onerror="this.src='image/li_1.PNG'">
                             </div>
                             <div class="pb-4 px-4 text-slate-800">
-                                <span class="text-[11px] font-semibold text-sky-600 uppercase tracking-widest block mb-1">นายกองค์การนักศึกษา</span>
+                                <span class="text-[15px] font-semibold text-sky-600 uppercase tracking-widest block mb-1">นายกองค์การนักศึกษา</span>
                                 <h4 class="text-base font-semibold leading-tight">กิตติธัช เพชรประยูร</h4>
-                                <p class="text-[10px] text-slate-400 uppercase font-normal mt-1">คณะวิศวกรรมศาสตร์</p>
+                                <p class="text-[15px] text-slate-400 uppercase font-normal mt-1">คณะวิศวกรรมศาสตร์</p>
                             </div>
                         </div>
                         <div class="flip-card-back">
@@ -397,106 +362,8 @@
         </div>
     </footer>
 
-    <!-- Firebase System -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, updateDoc, collection, addDoc, onSnapshot, increment, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rmutt-light-v3';
-        
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        let user = null;
-        let localCount = 0;
-
-        async function init() {
-            try {
-                const cred = await signInAnonymously(auth);
-                user = cred.user;
-                const counterRef = doc(db, 'artifacts', appId, 'public', 'data', 'voice_stats', 'global_counter');
-                const snapInit = await getDoc(counterRef);
-                if (!snapInit.exists()) {
-                    await setDoc(counterRef, { count: 0 });
-                }
-                onSnapshot(counterRef, (snap) => {
-                    if (snap.exists()) {
-                        localCount = snap.data().count || 0;
-                        document.getElementById('counter').innerText = localCount.toLocaleString();
-                    }
-                });
-            } catch (e) { console.warn("Firebase Init failed."); }
-        }
-
-        window.handleVoiceClick = async function() {
-            const el = document.getElementById('click-area');
-            const counterEl = document.getElementById('counter');
-            el.classList.add('scale-90');
-            setTimeout(() => el.classList.remove('scale-90'), 100);
-            localCount++;
-            counterEl.innerText = localCount.toLocaleString();
-            if (!user) return;
-            const counterRef = doc(db, 'artifacts', appId, 'public', 'data', 'voice_stats', 'global_counter');
-            try { await updateDoc(counterRef, { count: increment(1) }); } catch (e) {}
-        };
-
-        window.submitSuggestion = async function() {
-            const input = document.getElementById('suggestion-input');
-            const btn = document.getElementById('submit-btn');
-            const status = document.getElementById('submit-status');
-            const msg = input.value.trim();
-            if (!msg || !user) return;
-            btn.disabled = true;
-            status.innerText = "กำลังส่งข้อมูล...";
-            status.classList.remove('hidden', 'text-green-500', 'text-red-500');
-            try {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'suggestions'), {
-                    message: msg, timestamp: new Date().toISOString(), uid: user.uid
-                });
-                input.value = "";
-                status.innerText = "ส่งเสียงเรียบร้อยแล้ว ขอบคุณที่ร่วมเป็นส่วนหนึ่งครับ!";
-                status.classList.add('text-green-500');
-            } catch (e) {
-                status.innerText = "เกิดข้อผิดพลาดในการส่งข้อมูล";
-                status.classList.add('text-red-500');
-            } finally {
-                btn.disabled = false;
-                setTimeout(() => status.classList.add('hidden'), 5000);
-            }
-        };
-        init();
-    </script>
-
     <script>
-        const cloudsContainer = document.getElementById('clouds-container');
-        for (let i = 0; i < 6; i++) {
-            const cloud = document.createElement('div');
-            cloud.className = 'cloud';
-            const size = 200 + Math.random() * 200;
-            cloud.style.cssText = `
-                position: absolute; background: white; filter: blur(60px); border-radius: 50%;
-                width: ${size}px; height: ${size * 0.6}px; top: ${Math.random() * 80}vh;
-                animation: float-cloud ${20 + Math.random() * 10}s linear infinite;
-                animation-delay: -${Math.random() * 20}s;
-            `;
-            cloudsContainer.appendChild(cloud);
-        }
-
-        const starField = document.getElementById('star-field');
-        for (let i = 0; i < 300; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.cssText = `
-                position: absolute; width: ${Math.random() * 2}px; height: ${Math.random() * 2}px;
-                background: white; border-radius: 50%; top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;
-                --duration: ${2 + Math.random() * 3}s; opacity: ${Math.random()};
-            `;
-            starField.appendChild(star);
-        }
-
+        // --- Team Data ---
         const members = [
             { pos: "อุปนายกคนที่ 1", name: "คมชาญ เต็งหิรัญ", en: "COMCHAH TENGHIRAN", faculty: "คณะวิศวกรรมศาสตร์", quote: "ความเปลี่ยนแปลงที่ยั่งยืนเริ่มต้นที่การลงมือทำจริง", img: "image/li_2.png" },
             { pos: "อุปนายกคนที่ 2", name: "ธนากร ปานแก้ว", en: "THANAKORN PANKAEW", faculty: "คณะบริหารธุรกิจ", quote: "ทุกความคิดสร้างสรรค์มีค่าและควรได้รับแรงสนับสนุน", img: "image/li_3.png" },
@@ -522,7 +389,7 @@
                         <div class="img-frame">
                             <img src="${m.img}" alt="${m.name}" class="candidate-img" onerror="this.src='https://via.placeholder.com/300x400?text=CANDIDATE'">
                         </div>
-                        <div class="pb-2 px-4 text-slate-800">
+                        <div class="pb-2 px-4 text-slate-800 text-center">
                             <span class="text-[10px] font-semibold text-sky-600 uppercase tracking-widest block mb-1">${m.pos}</span>
                             <h4 class="text-base font-semibold leading-tight">${m.name}</h4>
                             <p class="text-[9px] text-slate-400 uppercase font-normal mt-1">${m.faculty}</p>
@@ -539,6 +406,33 @@
             `;
             teamGrid.appendChild(card);
         });
+
+        // --- Visual UI Effects ---
+        const starField = document.getElementById('star-field');
+        for (let i = 0; i < 300; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.cssText = `
+                position: absolute; width: ${Math.random() * 2}px; height: ${Math.random() * 2}px;
+                background: white; border-radius: 50%; top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;
+                --duration: ${2 + Math.random() * 3}s; opacity: ${Math.random()};
+            `;
+            starField.appendChild(star);
+        }
+
+        const cloudsContainer = document.getElementById('clouds-container');
+        for (let i = 0; i < 6; i++) {
+            const cloud = document.createElement('div');
+            cloud.className = 'cloud';
+            const size = 200 + Math.random() * 200;
+            cloud.style.cssText = `
+                position: absolute; background: white; filter: blur(60px); border-radius: 50%;
+                width: ${size}px; height: ${size * 0.6}px; top: ${Math.random() * 80}vh;
+                animation: float-cloud ${20 + Math.random() * 10}s linear infinite;
+                animation-delay: -${Math.random() * 20}s;
+            `;
+            cloudsContainer.appendChild(cloud);
+        }
 
         function reveal() {
             document.querySelectorAll(".reveal").forEach(r => {
